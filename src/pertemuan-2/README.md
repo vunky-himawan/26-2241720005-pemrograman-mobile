@@ -59,3 +59,7 @@ Eksekusi kode Dart dapat beroperasi dalam dua mode — kompilasi Just-In-Time (J
 
 - **Kompilasi JIT** adalah tempat kode dikompilasi sesuai kebutuhan—Just in time. Pendekatan ini digunakan untuk menjalankan kode pada command line atau selama proses pengembangan aplikasi mobile yang dapat memanfaatkan fitur seperti debugging dan hot reload.
 - **Kompilasi AOT** adalah dimana Dart VM dan kode Dart dikompilasi sebelumnya, VM bekerja lebih seperti sistem runtime Dart, yang menyediakan garbage collector dan metode-metode native dari Dart software development kit (SDK) pada aplikasi. Pendekatan ini memiliki keuntungan performa yang sangat besar dibandingkan kompilasi JIT, tetapi fitur lain seperti debugging dan hot reload tidak tersedia.
+
+### Soal 4 (Slide)
+
+<a href="https://docs.google.com/presentation/d/1hNlgt5Z8poUFuVDshPuh-j6CIzDtJiQ5S67-QvIeH2U/edit#slide=id.gb88dea59ed_0_176">Link Google Slide</a>
