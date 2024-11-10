@@ -45,15 +45,15 @@
 
 ![Langkah 6](/docs/pertemuan-11/praktikum-1/langkah-6.png)
 
-#### Langkah 7: buat method _buildAddTaskButton()
+#### Langkah 7: buat method \_buildAddTaskButton()
 
 ![Langkah 7](/docs/pertemuan-11/praktikum-1/langkah-7.png)
 
-#### Langkah 8: buat widget _buildList()
+#### Langkah 8: buat widget \_buildList()
 
 ![Langkah 8](/docs/pertemuan-11/praktikum-1/langkah-8.png)
 
-#### Langkah 9: buat widget _buildTaskTile
+#### Langkah 9: buat widget \_buildTaskTile
 
 ![Langkah 9](/docs/pertemuan-11/praktikum-1/langkah-9.png)
 
@@ -93,7 +93,8 @@ Dengan melakukan ekspor model seperti hal tersebut, kita bisa mengimpor kelas, f
 ```Dart
 Plan plan = const Plan();
 ```
-Objek ```plan``` digunakan sebagai instance dari kelas ```Plan```, yang diinisialisasi sekali sebagai ```const```. Karena bersifat ```const```, menyatakan bahwa ```Plan``` adalah objek immutable dan tidak akan berubah selama siklus hidup widget ```PlanScreen```. 
+
+Objek `plan` digunakan sebagai instance dari kelas `Plan`, yang diinisialisasi sekali sebagai `const`. Karena bersifat `const`, menyatakan bahwa `Plan` adalah objek immutable dan tidak akan berubah selama siklus hidup widget `PlanScreen`.
 
 ### 4. Lakukan capture hasil dari Langkah 9 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
 
@@ -116,9 +117,9 @@ Pada langkah 9 ini setelah melakukan praktikum sebelumnya, saya mendapatkan sebu
   }
 ```
 
-- ```initState()``` dipanggil satu kali ketika State objek dibuat, yaitu saat widget ```PlanScreen``` pertama kali dimuat. Ini adalah tempat untuk melakukan inisialisasi awal data yang akan digunakan oleh widget. 
-- Pada langkah 11, ```initState()``` digunakan untuk membuat ScrollController dan menetapkan listener ke controller tersebut.
-- Listener pada ```ScrollController``` akan membuat ```FocusScope.of(context).requestFocus(FocusNode());``` setiap kali pengguna melakukan scroll. Kode ini berguna untuk menghilangkan fokus dari widget input, yang membuat keyboard tertutup ketika pengguna melakukan scrolling.
+- `initState()` dipanggil satu kali ketika State objek dibuat, yaitu saat widget `PlanScreen` pertama kali dimuat. Ini adalah tempat untuk melakukan inisialisasi awal data yang akan digunakan oleh widget.
+- Pada langkah 11, `initState()` digunakan untuk membuat ScrollController dan menetapkan listener ke controller tersebut.
+- Listener pada `ScrollController` akan membuat `FocusScope.of(context).requestFocus(FocusNode());` setiap kali pengguna melakukan scroll. Kode ini berguna untuk menghilangkan fokus dari widget input, yang membuat keyboard tertutup ketika pengguna melakukan scrolling.
 
 ```Dart
 @override
@@ -128,8 +129,8 @@ Pada langkah 9 ini setelah melakukan praktikum sebelumnya, saya mendapatkan sebu
   }
 ```
 
-- ```dispose()``` adalah metode terakhir yang dipanggil sebelum objek ```State``` dihapus dari memori. ```dispose()``` merupakan sebuah fungsi untuk membersihkan atau menghapus data-data seperti controller, stream, atau listener yang dibuat sebelumnya.
-- Pada langkah 13, ```scrollController.dispose();``` digunakan untuk menghapus controller dan membersihkan memori yang digunakan. Jika ```dispose()``` tidak dipanggil, akan terjadi kebocoran memori (memory leak), karena ```scrollController``` tetap berada di memori meskipun tidak lagi digunakan.
+- `dispose()` adalah metode terakhir yang dipanggil sebelum objek `State` dihapus dari memori. `dispose()` merupakan sebuah fungsi untuk membersihkan atau menghapus data-data seperti controller, stream, atau listener yang dibuat sebelumnya.
+- Pada langkah 13, `scrollController.dispose();` digunakan untuk menghapus controller dan membersihkan memori yang digunakan. Jika `dispose()` tidak dipanggil, akan terjadi kebocoran memori (memory leak), karena `scrollController` tetap berada di memori meskipun tidak lagi digunakan.
 
 # Tugas Praktikum 2: InheritedWidget
 
@@ -139,27 +140,93 @@ Pada langkah 9 ini setelah melakukan praktikum sebelumnya, saya mendapatkan sebu
 
 #### Langkah 1: Buat file plan_provider.dart
 
+![Langkah 1](/docs/pertemuan-11/praktikum-2/langkah-1.png)
+
 #### Langkah 2: Edit main.dart
+
+![Langkah 2](/docs/pertemuan-11/praktikum-2/langkah-2.png)
 
 #### Langkah 3: Tambah method pada model plan.dart
 
+![Langkah 3](/docs/pertemuan-11/praktikum-2/langkah-3.png)
+
 #### Langkah 4: Pindah ke PlanScreen
 
-#### Langkah 5: Edit method _buildAddTaskButton
+![Langkah 4](/docs/pertemuan-11/praktikum-2/langkah-4.png)
 
-#### Langkah 6: Edit method _buildTaskTile
+#### Langkah 5: Edit method \_buildAddTaskButton
 
-#### Langkah 7: Edit _buildList
+![Langkah 5](/docs/pertemuan-11/praktikum-2/langkah-5.png)
+
+#### Langkah 6: Edit method \_buildTaskTile
+
+![Langkah 6](/docs/pertemuan-11/praktikum-2/langkah-6.png)
+
+#### Langkah 7: Edit \_buildList
+
+![Langkah 7](/docs/pertemuan-11/praktikum-2/langkah-7.png)
 
 #### Langkah 8: Tetap di class PlanScreen
 
+![Langkah 8](/docs/pertemuan-11/praktikum-2/langkah-8.png)
+
 #### Langkah 9: Tambah widget SafeArea
+
+![Langkah 9](/docs/pertemuan-11/praktikum-2/langkah-9.png)
+
+![Langkah 9 Result](/docs/pertemuan-11/praktikum-2/result-langkah-9.gif)
 
 ### 2. Jelaskan mana yang dimaksud InheritedWidget pada langkah 1 tersebut! Mengapa yang digunakan InheritedNotifier?
 
+```Dart
+import 'package:flutter/material.dart';
+import '../models/data_layer.dart';
+
+class PlanProvider extends InheritedNotifier<ValueNotifier<Plan>> {
+  const PlanProvider(
+      {super.key,
+      required super.child,
+      required ValueNotifier<Plan> super.notifier});
+
+  static ValueNotifier<Plan> of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<PlanProvider>()!
+        .notifier!;
+  }
+}
+```
+
+`PlanProvider` menggunakan `InheritedNotifier`, dimana `InheritedNotifier` merupakan kombinasi antara `InheritedWidget` dan `ChangeNotifier`. Pada Flutter, `InheritedWidget` digunakan untuk membuat data yang bisa diakses di seluruh widget tree tanpa harus melewati data tersebut melalui constructor secara manual dari satu widget ke widget lainnya.
+
+Mengapa yang digunakan `InheritedNotifier`? Karena InheritedWidget memungkinkan `PlanProvider` menyebarkan data secara efisien dan terstruktur di seluruh widget tree, dengan `InheritedNotifier` menambahkan kemampuan untuk mendeteksi perubahan secara otomatis.
+
 ### 3. Jelaskan maksud dari method di langkah 3 pada praktikum tersebut! Mengapa dilakukan demikian?
 
+```Dart
+import 'package:master_plan/models/task.dart';
+
+class Plan {
+  final String name;
+  final List<Task> tasks;
+
+  Plan({this.name = '', this.tasks = const []});
+
+  int get completedCount => tasks.where((task) => task.complete).length;
+
+  String get completenessMessage =>
+      '$completedCount out of ${tasks.length} tasks';
+}
+```
+
+Method `completedCount` digunakan untuk mendapatkan jumlah tugas yang selesai tanpa perlu membuat variabel tambahan. `tasks.where((task) => task.complete)` menggunakan filter `where` untuk mendapatkan daftar tugas yang sudah selesai (memiliki properti complete yang bernilai true). `.length` kemudian menghitung jumlah elemen dari daftar tugas yang sudah difilter. Hasil akhirnya adalah jumlah tugas yang selesai, yang diakses melalui completedCount.
+
+Method `completenessMessage` digunakan untuk pengelolaan pesan status, membuat pesan secara dinamis berdasarkan kondisi tasks, method ini menggunakan `completedCount` untuk mengambil jumlah tugas yang selesai dan tasks.length untuk menghitung total tugas, lalu menggabungkannya dalam sebuah string.
+
 ### 4. Lakukan capture hasil dari Langkah 9 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
+
+![Final Result](/docs/pertemuan-11/praktikum-2/final-result.gif)
+
+Pada praktikum ini, saya memperbaiki aplikasi pada praktikum 1 yaitu aplikasi todo list hanya saja pada praktikum ini diterapkan `Provider` untuk menyimpan dan mengelola data. Pada praktikum ini menggunakan `ChangeNotifier` sebagai penyimpan data yang dapat memberi `notif` ketika terjadi perubahan, serta `ChangeNotifierProvider` untuk menyebarkan data tersebut ke seluruh widget. Dalam implementasi ini, menggunakan `InheritedNotifier` sebagai penyebaran data ke widget lain. Data yang disimpan dalam `Provider` dapat diakses dan ditampilkan di widget melalui `InheritedWidget` sehingga widget dapat berlangganan dan bereaksi terhadap perubahan data tanpa harus melewati data melalui constructor widget.
 
 # Tugas Praktikum 3: State di Multiple Screens
 
@@ -181,19 +248,19 @@ Pada langkah 9 ini setelah melakukan praktikum sebelumnya, saya mendapatkan sebu
 
 #### Langkah 7: Widget build
 
-#### Langkah 8: Edit _buildTaskTile
+#### Langkah 8: Edit \_buildTaskTile
 
 #### Langkah 9: Buat screen baru
 
-#### Langkah 10: Pindah ke class _PlanCreatorScreenState
+#### Langkah 10: Pindah ke class \_PlanCreatorScreenState
 
 #### Langkah 11: Pindah ke method build
 
-#### Langkah 12: Buat widget _buildListCreator
+#### Langkah 12: Buat widget \_buildListCreator
 
 #### Langkah 13: Buat void addPlan()
 
-#### Langkah 14: Buat widget _buildMasterPlans()
+#### Langkah 14: Buat widget \_buildMasterPlans()
 
 ### 2. Berdasarkan Praktikum 3 yang telah Anda lakukan, jelaskan maksud dari gambar diagram berikut ini!
 
