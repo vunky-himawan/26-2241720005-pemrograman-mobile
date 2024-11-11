@@ -236,34 +236,94 @@ Pada praktikum ini, saya memperbaiki aplikasi pada praktikum 1 yaitu aplikasi to
 
 #### Langkah 1: Edit PlanProvider
 
+![Langkah 1](/docs/pertemuan-11/praktikum-3/langkah-1.png)
+
 #### Langkah 2: Edit main.dart
+
+![Langkah 2](/docs/pertemuan-11/praktikum-3/langkah-2.png)
 
 #### Langkah 3: Edit plan_screen.dart
 
+![Langkah 3](/docs/pertemuan-11/praktikum-3/langkah-3.png)
+
 #### Langkah 4: Error
+
+![Langkah 4](/docs/pertemuan-11/praktikum-3/langkah-4.png)
 
 #### Langkah 5: Tambah getter Plan
 
+![Langkah 5](/docs/pertemuan-11/praktikum-3/langkah-5.png)
+
 #### Langkah 6: Method initState()
+
+![Langkah 6](/docs/pertemuan-11/praktikum-3/langkah-6.png)
 
 #### Langkah 7: Widget build
 
+![Langkah 7](/docs/pertemuan-11/praktikum-3/langkah-7.png)
+
 #### Langkah 8: Edit \_buildTaskTile
+
+![Langkah 8](/docs/pertemuan-11/praktikum-3/langkah-8.png)
 
 #### Langkah 9: Buat screen baru
 
+![Langkah 9](/docs/pertemuan-11/praktikum-3/langkah-9.1.png)
+
+![Langkah 9](/docs/pertemuan-11/praktikum-3/langkah-9.2.png)
+
 #### Langkah 10: Pindah ke class \_PlanCreatorScreenState
+
+![Langkah 10](/docs/pertemuan-11/praktikum-3/langkah-10.png)
 
 #### Langkah 11: Pindah ke method build
 
+![Langkah 11](/docs/pertemuan-11/praktikum-3/langkah-11.png)
+
 #### Langkah 12: Buat widget \_buildListCreator
+
+![Langkah 12](/docs/pertemuan-11/praktikum-3/langkah-12.png)
 
 #### Langkah 13: Buat void addPlan()
 
+![Langkah 13](/docs/pertemuan-11/praktikum-3/langkah-13.png)
+
 #### Langkah 14: Buat widget \_buildMasterPlans()
+
+![Langkah 14](/docs/pertemuan-11/praktikum-3/langkah-14.png)
 
 ### 2. Berdasarkan Praktikum 3 yang telah Anda lakukan, jelaskan maksud dari gambar diagram berikut ini!
 
 ![diagram](/docs/pertemuan-11/diagram-tugas-praktikum-3.png)
 
+**Diagram Kiri: `PlanCreatorScreen`**
+
+Di sisi kiri, diagram menunjukkan struktur widget pada layar PlanCreatorScreen:
+
+- `MaterialApp`: Widget utama aplikasi yang menyediakan tema dan konfigurasi dasar.
+- `PlanProvider`: Provider yang digunakan untuk menyimpan dan mengelola data Plan secara global melalui ValueNotifier.
+- `PlanCreatorScreen`: Layar utama yang digunakan oleh pengguna untuk menambahkan plan baru. Di dalamnya, ada: 
+  - `Column`: Menyusun elemen secara vertikal, yaitu `_buildListCreator()` untuk input teks, dan `_buildMasterPlans()` untuk menampilkan daftar plan.
+  - `TextField`: Input teks untuk menambahkan nama plan.
+  - `Expanded`: Menampung `ListView` agar dapat menyesuaikan ruang yang tersisa.
+  - `ListView`: Menampilkan daftar Plan yang telah ditambahkan. Setiap item dalam `ListView` adalah sebuah `ListTile` yang dapat tekan untuk berpindah ke layar `PlanScreen` untuk melihat detail plan.
+
+**Navigasi Antar Layar**
+
+Navigasi antar layar dilakukan dengan Navigator.push. Saat pengguna menekan salah satu item di `ListView` pada `PlanCreatorScreen`, aplikasi akan memanggil `Navigator.push` untuk berpindah ke `PlanScreen`. Di `PlanScreen`, pengguna dapat melihat dan mengelola tugas-tugas dari plan yang dipilih. 
+
+**Diagram Kanan: `PlanScreen`**
+
+Di sisi kanan, diagram menunjukkan struktur widget pada layar `PlanScreen` yang ditampilkan setelah navigasi dilakukan.
+
+- `MaterialApp`: Menjadi root dari aplikasi.
+- `PlanScreen`: Layar detail untuk plan yang dipilih, yang diakses setelah pengguna menekan salah satu item di ListView di `PlanCreatorScreen`.
+- `Scaffold`: Memberikan struktur dasar layar `PlanScreen`, dengan `AppBar`, `body`, dan `FloatingActionButton`.
+- `Column`: Menyusun widget secara vertikal untuk menampilkan daftar tugas `_buildList` dan informasi status.
+- `Expanded`: Menampung `ListView` yang berisi daftar tugas agar dapat menyesuaikan ruang yang tersedia di layar.
+- `SafeArea`: Membungkus Text di bagian bawah untuk memastikan teks tidak terpotong di area tertentu, seperti notch pada perangkat.
+- `Text`: Menampilkan pesan yang menunjukkan status penyelesaian dari plan saat ini.
+
 ### 3. Lakukan capture hasil dari Langkah 14 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
+
+![Hasil Akhir](/docs/pertemuan-11/praktikum-3/final-result.gif)
