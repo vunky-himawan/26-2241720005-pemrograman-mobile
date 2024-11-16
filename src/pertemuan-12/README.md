@@ -41,13 +41,11 @@
 
 ![Langkah 5](/docs/pertemuan-12/praktikum-1/langkah-5.png)
 
-## Soal
-
-1. Mengubah `title` menjadi nama panggilan
+## Soal 1. Mengubah `title` menjadi nama panggilan
 
 ![Soal 1](/docs/pertemuan-12/praktikum-1/soal-1.png)
 
-2. Mencari buku favorit dan mengakses API www.googleapis.com
+## Soal 2. Mencari buku favorit dan mengakses API www.googleapis.com
 
 ![Soal 2](/docs/pertemuan-12/praktikum-1/soal-2.1.png)
 
@@ -55,17 +53,91 @@
 
 Ketika mencoba mengakses API, muncul error rate limit.
 
-3. `substring` dan `catchError`
+## Soal 3. `substring` dan `catchError`
 
 `substring` digunakan untuk mengambil beberapa karakter dari string misal 0, 450 artinya mengambil string yang dimulai dari karakter pertama hingga 450 karakter, dan `catchError` digunakan untuk menangani error yang terjadi pada kode yang dijalankan.
 
 ![Result](/docs/pertemuan-12/praktikum-1/soal-3.gif)
 
 # Praktikum 2: Menggunakan await/async untuk menghindari callbacks
+
+### Langkah 1: Buka file main.dart
+
+![Langkah 1](/docs/pertemuan-12/praktikum-2/langkah-1.png)
+
+### Langkah 2: Tambah method count()
+
+![Langkah 2](/docs/pertemuan-12/praktikum-2/langkah-2.png)
+
+### Langkah 3: Panggil count()
+
+![Langkah 3](/docs/pertemuan-12/praktikum-2/langkah-3.png)
+
+### Langkah 4: Run
+
+![Langkah 4](/docs/pertemuan-12/praktikum-2/langkah-4.png)
+
+## Soal 4
+
+```Dart
+Future<int> returnOneAsync() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return 1;
+  }
+```
+
+Fungsi ini menunggu selama 3 detik dan kemudian mengembalikan nilai 1.
+
+```Dart
+Future<int> returnTwoAsync() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return 2;
+  }
+```
+
+Fungsi ini menunggu selama 3 detik dan kemudian mengembalikan nilai 2.
+
+```Dart
+Future<int> returnThreeAsync() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return 3;
+  }
+```
+
+Fungsi ini menunggu selama 3 detik dan kemudian mengembalikan nilai 3.
+
+```Dart
+Future count() async {
+    int total = 0;
+    total = await returnOneAsync();
+    total += await returnTwoAsync();
+    total += await returnThreeAsync();
+    setState(() {
+      result = total.toString();
+    });
+  }
+```
+
+Pada fungsi count menjalankan 3 fungsi:
+
+- Fungsi `returnOneAsync` dipanggil, dan karena fungsi ini diberikan delay selama 3 detik, maka akan menunggu sampai 3 detik sebelum mendapatkan nilai 1 kemudian nilai 1 disimpan dalam variabel total.
+
+- Fungsi `returnTwoAsync` dipanggil setelah fungsi pertama selesai. Kemudian menunggu lagi selama 3 detik untuk mendapatkan nilai 2. Nilai 2 akan ditambahkan ke total, sehingga total menjadi 3 (1 + 2).
+
+- Fungsi `returnThreeAsync` dipanggil setelah fungsi kedua selesai. Kemudian akan menunggu lagi selama 3 detik untuk mendapatkan nilai 3. Nilai 3 akan ditambahkan ke total, sehingga total sekarang menjadi 6 (1 + 2 + 3).
+
+Setelah semua fungsi dijalankan dan total telah dihitung, fungsi setState digunakan untuk memperbarui antarmuka pengguna (UI).
+
 # Praktikum 3: Menggunakan Completer di Future
+
 # Praktikum 4: Memanggil Future secara paralel
+
 # Praktikum 5: Menangani Respon Error pada Async Code
+
 # Praktikum 6: Menggunakan Future dengan StatefulWidget
+
 # Praktikum 7: Manajemen Future dengan FutureBuilder
+
 # Praktikum 8: Navigation route dengan Future Function
+
 # Praktikum 9: Memanfaatkan async/await dengan Widget Dialog
