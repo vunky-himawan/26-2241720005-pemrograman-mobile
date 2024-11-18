@@ -130,14 +130,243 @@ Setelah semua fungsi dijalankan dan total telah dihitung, fungsi setState diguna
 
 # Praktikum 3: Menggunakan Completer di Future
 
+### Langkah 1: Buka main.dart
+
+![Langkah 1](/docs/pertemuan-12/praktikum-3/langkah-1.png)
+
+### Langkah 2: Tambahkan variabel dan method
+
+![Langkah 2](/docs/pertemuan-12/praktikum-3/langkah-2.png)
+
+### Langkah 3: Ganti isi kode onPressed()
+
+![Langkah 3](/docs/pertemuan-12/praktikum-3/langkah-3.png)
+
+### Langkah 4:
+
+![Langkah 4](/docs/pertemuan-12/praktikum-3/langkah-4.png)
+
+### Langkah 5: Ganti method calculate()
+
+![Langkah 5](/docs/pertemuan-12/praktikum-3/langkah-5.png)
+
+### Langkah 6: Pindah ke onPressed()
+
+![Langkah 6](/docs/pertemuan-12/praktikum-3/langkah-6.png)
+
+## Soal 5
+
+```Dart
+late Completer completer;
+
+Future getNumber() {
+  completer = Completer<int>();
+  calculate();
+  return completer.future;
+}
+
+Future calculate() async {
+  await Future.delayed(const Duration(seconds : 5));
+  completer.complete(42);
+}
+```
+
+- `Completer` adalah sebuah objek yang membantu dalam menangani hasil dari operasi asynchronous yang akan selesai nantinya.
+
+- Fungsi `getNumber` membuat sebuah Completer baru bernama completer, kemudian menjalankan fungsi `calculate`. Fungsi `getNumber` ini mengembalikan `completer.future`, yang merupakan sebuah `promise` atau `future`.
+
+- Fungsi `calculate` fungsi ini akan memberikan delay selama 5 detik, setelah itu fungsi ini menyelesaikan `completer` dengan nilai 42 menggunakan `completer.complete(42)`.
+
+Jadi ketika `getNumber` dipanggil, sebuah `Completer` baru dibuat yang nantinya akan memberikan hasil. Kemudian fungsi `calculate` dipanggil dan harus menunggu selama 5 detik untuk mendapatkan hasil. Setelah 5 detik, `completer.complete(42)` dijalankan untuk memberikan nilai 42 sebagai hasil. `getNumber` mengembalikan `completer.future` yang merupakan sebuah `promise`, ketika `completer.complete(42)` dipanggil, `promise` tersebut diselesaikan dengan nilai 42.
+
+![Result GIF](/docs/pertemuan-12/praktikum-3/soal-5.gif)
+
+## Soal 6
+
+Kode pada langkah 2 dan 5-6 tidak jauh berbeda, hanya saja pada langkah 5 ditambahkan block `try/catch` untuk menangani error. Fungsi `calculate2` menggunakan `try/catch` untuk menangani error, jika error terjadi maka fungsi `completer.completeError({})` dipanggil untuk memberikan error sebagai hasil. Lalu pada langkah 6 terdapat `catchError` yang akan mengembalikan error yang terjadi ketika `promise` dibuat.
+
+![Result GIF](/docs/pertemuan-12/praktikum-3/soal-6.gif)
+
 # Praktikum 4: Memanggil Future secara paralel
+
+### Langkah 1: Buka file main.dart
+
+![Langkah 1](/docs/pertemuan-12/praktikum-4/langkah-1.png)
+
+### Langkah 2: Edit onPressed()
+
+![Langkah 2](/docs/pertemuan-12/praktikum-4/langkah-2.png)
+
+### Langkah 3: Run
+
+![Langkah 3](/docs/pertemuan-12/praktikum-4/langkah-3.png)
+
+### Langkah 4: Ganti variabel futureGroup
+
+![Langkah 4](/docs/pertemuan-12/praktikum-4/langkah-4.png)
+
+## Soal 7
+
+![Soal 7](/docs/pertemuan-12/praktikum-4/soal-7.gif)
+
+## Soal 8
+
+**Kode langkah 1 menggunakan `FutureGroup`:**
+
+Pada langkah 1 merupakan cara manual untuk melakukan grouping future/ Jadi kita harus memanggil add untuk setiap future secara eksplisit, dan kemudian "menutup" future group dengan `close()`, dimana function `close()` menandakan bahwa tidak ada future lain yang akan ditambahkan ke future group.
+
+**Kode langkah 4 menggunakan `Future.wait`:**
+
+Pada langkah 4 ini langsung memberikan semua future ke dalam sebuah list, dan sistem otomatis menunggu hingga semua future selesai. Tidak perlu menambahkan atau menutup group secara manual.
 
 # Praktikum 5: Menangani Respon Error pada Async Code
 
+### Langkah 1: Buka file main.dart
+
+![Langkah 1](/docs/pertemuan-12/praktikum-5/langkah-1.png)
+
+### Langkah 2: ElevatedButton
+
+![Langkah 2](/docs/pertemuan-12/praktikum-5/langkah-2.png)
+
+### Langkah 3: Run
+
+![Langkah 3](/docs/pertemuan-12/praktikum-5/langkah-3.1.png)
+
+![Langkah 3](/docs/pertemuan-12/praktikum-5/langkah-3.2.png)
+
+### Langkah 4: Tambah method handleError()
+
+![Langkah 4](/docs/pertemuan-12/praktikum-5/langkah-4.png)
+
+## Soal 9
+
+![Soal 9](/docs/pertemuan-12/praktikum-5/soal-9.gif)
+
+## Soal 10
+
+![handleError](/docs/pertemuan-12/praktikum-5/soal-10.1.png)
+
+Kode pada langkah 1 menggunakan pendekatan chaining, pada kode tersebut menggunakan `then` untuk menangani hasil sukses dari `returnError` (pada contoh ini, `returnError` akan selalu gagal).
+Menggunakan `catchError` untuk menangani error yang terjadi.
+`whenComplete` digunakan untuk kode yang akan dijalankan selalu, baik ada error maupun tidak.
+
+Sedangkan kode pada langkah 2 menggunakan `try-catch` untuk membungkus pemanggilan function `returnError`
+
+- try: Menjalankan kode utama.
+- catch: Menangkap dan menangani error jika terjadi.
+- finally digunakan untuk menjalankan kode yang selalu dijalankan.
+
+**Hasil**
+
+![Result](/docs/pertemuan-12/praktikum-5/soal-10.2.png)
+
 # Praktikum 6: Menggunakan Future dengan StatefulWidget
+
+### Langkah 1: install plugin geolocator
+
+![Langkah 1](/docs/pertemuan-12/praktikum-6/langkah-1.png)
+
+### Langkah 2: Tambah permission GPS
+
+![Langkah 2](/docs/pertemuan-12/praktikum-6/langkah-2.png)
+
+### Langkah 3: Buat file geolocation.dart
+
+![Langkah 3](/docs/pertemuan-12/praktikum-6/langkah-3.png)
+
+### Langkah 4: Buat StatefulWidget
+
+![Langkah 4](/docs/pertemuan-12/praktikum-6/langkah-4.png)
+
+### Langkah 5: Isi kode geolocation.dart
+
+![Langkah 5](/docs/pertemuan-12/praktikum-6/langkah-5.png)
+
+### Langkah 6: Edit main.dart
+
+![Langkah 6](/docs/pertemuan-12/praktikum-6/langkah-6.png)
+
+### Langkah 7: Run
+
+![Langkah 7](/docs/pertemuan-12/praktikum-6/langkah-7.png)
+
+### Langkah 8: Tambahkan animasi loading
+
+![Langkah 8](/docs/pertemuan-12/praktikum-6/langkah-8.png)
+
+## Soal 11
+
+![Soal 11](/docs/pertemuan-12/praktikum-6/soal-11.png)
+
+## Soal 12
+
+- Menambahkan `Future.delayed` untuk menampilkan loading
+
+![Soal 12](/docs/pertemuan-12/praktikum-6/soal-12.1.png)
+
+- Apakah Anda mendapatkan koordinat GPS ketika run di browser? Mengapa demikian?
+
+Saya mendapatkan koordinat GPS ketika run di browser karena sudah memberikan permission pada browser untuk mengakses lokasi.
+
+![Soal 12](/docs/pertemuan-12/praktikum-6/langkah-12.3.png)
+
+![Soal 12](/docs/pertemuan-12/praktikum-6/langkah-12.5.png)
+
+![Soal 12](/docs/pertemuan-12/praktikum-6/langkah-12.4.png)
+
+**Result**
+
+![Result](/docs/pertemuan-12/praktikum-6/soal-12.2.gif)
 
 # Praktikum 7: Manajemen Future dengan FutureBuilder
 
+### Langkah 1: Modifikasi method getPosition()
+
+### Langkah 2: Tambah variabel
+
+### Langkah 3: Tambah initState()
+
+### Langkah 4: Edit method build()
+
+### Langkah 5: Tambah handling error
+
+## Soal 13
+
+## Soal 14
+
 # Praktikum 8: Navigation route dengan Future Function
 
+### Langkah 1: Buat file baru navigation_first.dart
+
+### Langkah 2: Isi kode navigation_first.dart
+
+### Langkah 3: Tambah method di class _NavigationFirstState
+
+### Langkah 4: Buat file baru navigation_second.dart
+
+### Langkah 5: Buat class NavigationSecond dengan StatefulWidget
+
+### Langkah 6: Edit main.dart
+
+### Langkah 7: Run
+
+## Soal 15
+
+## Soal 16
+
 # Praktikum 9: Memanfaatkan async/await dengan Widget Dialog
+
+### Langkah 1: Buat file baru navigation_dialog.dart
+
+### Langkah 2: Isi kode navigation_dialog.dart
+
+### Langkah 3: Tambah method async
+
+### Langkah 4: Panggil method di ElevatedButton
+
+### Langkah 5: Edit main.dart
+
+### Langkah 6: Run
+
+## Soal 17
