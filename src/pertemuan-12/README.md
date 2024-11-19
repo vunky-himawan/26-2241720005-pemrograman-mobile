@@ -323,50 +323,130 @@ Saya mendapatkan koordinat GPS ketika run di browser karena sudah memberikan per
 
 ### Langkah 1: Modifikasi method getPosition()
 
+![Langkah 1](/docs/pertemuan-12/praktikum-7/langkah-1.png)
+
 ### Langkah 2: Tambah variabel
+
+![Langkah 2](/docs/pertemuan-12/praktikum-7/langkah-2.png)
 
 ### Langkah 3: Tambah initState()
 
+![Langkah 3](/docs/pertemuan-12/praktikum-7/langkah-3.png)
+
 ### Langkah 4: Edit method build()
+
+![Langkah 4](/docs/pertemuan-12/praktikum-7/langkah-4.png)
 
 ### Langkah 5: Tambah handling error
 
+![Langkah 5](/docs/pertemuan-12/praktikum-7/langkah-5.png)
+
 ## Soal 13
 
+![Soal 13](/docs/pertemuan-12/praktikum-7/soal-13.gif)
+
+Tidak ada perubahan pada UI, karena pada dasarnya yang dirubah adalah penulisan kode untuk mendapatkan data lokasi saja (tidak merubah UI sepenuhnya).
+
 ## Soal 14
+
+![Soal 14](/docs/pertemuan-12/praktikum-7/soal-14.gif)
+
+Tidak ada perubahan pada UI, karena pada dasarnya yang dirubah adalah penulisan kode untuk mendapatkan data lokasi saja (tidak merubah UI sepenuhnya).
 
 # Praktikum 8: Navigation route dengan Future Function
 
 ### Langkah 1: Buat file baru navigation_first.dart
 
+![Langkah 1](/docs/pertemuan-12/praktikum-8/langkah-1.png)
+
 ### Langkah 2: Isi kode navigation_first.dart
 
-### Langkah 3: Tambah method di class _NavigationFirstState
+![Langkah 2](/docs/pertemuan-12/praktikum-8/langkah-2.png)
+
+### Langkah 3: Tambah method di class \_NavigationFirstState
+
+![Langkah 3](/docs/pertemuan-12/praktikum-8/langkah-3.png)
 
 ### Langkah 4: Buat file baru navigation_second.dart
 
+![Langkah 4](/docs/pertemuan-12/praktikum-8/langkah-4.png)
+
 ### Langkah 5: Buat class NavigationSecond dengan StatefulWidget
+
+![Langkah 5](/docs/pertemuan-12/praktikum-8/langkah-5.png)
 
 ### Langkah 6: Edit main.dart
 
+![Langkah 6](/docs/pertemuan-12/praktikum-8/langkah-6.png)
+
 ### Langkah 7: Run
+
+![Langkah 7](/docs/pertemuan-12/praktikum-8/langkah-7.gif)
 
 ## Soal 15
 
+![Soal 15](/docs/pertemuan-12/praktikum-8/soal-15.1.png)
+
+Mengubah warna dengan warna favorit.
+
+![Soal 15](/docs/pertemuan-12/praktikum-8/soal-15.2.png)
+
 ## Soal 16
+
+Yang terjadi ketika klik setiap button adalah mengubah warna background pada halaman `NavigationFirst`. Hal itu terjadi Ketika pengguna berada di layar `NavigationFirst` dan mengklik tombol "Change Color", mereka diarahkan ke layar `NavigationSecond`, di mana mereka dapat memilih salah satu dari tiga warna yang tersedia (Red, Green, Blue). Setelah memilih warna, layar `NavigationSecond` akan ditutup, dan layar `NavigationFirst` akan diperbarui dengan warna yang dipilih.
+
+Mengganti warna pada langkah 5 dengan warna favorit.
+
+![Soal 16](/docs/pertemuan-12/praktikum-8/soal-16.1.png)
+
+**Result**
+
+![Result](/docs/pertemuan-12/praktikum-8/soal-16.2.gif)
 
 # Praktikum 9: Memanfaatkan async/await dengan Widget Dialog
 
 ### Langkah 1: Buat file baru navigation_dialog.dart
 
+![Langkah 1](/docs/pertemuan-12/praktikum-9/langkah-1.png)
+
 ### Langkah 2: Isi kode navigation_dialog.dart
+
+![Langkah 2](/docs/pertemuan-12/praktikum-9/langkah-2.png)
 
 ### Langkah 3: Tambah method async
 
+![Langkah 3](/docs/pertemuan-12/praktikum-9/langkah-3.png)
+
 ### Langkah 4: Panggil method di ElevatedButton
+
+![Langkah 4](/docs/pertemuan-12/praktikum-9/langkah-4.png)
 
 ### Langkah 5: Edit main.dart
 
+![Langkah 5](/docs/pertemuan-12/praktikum-9/langkah-5.png)
+
 ### Langkah 6: Run
 
+![Langkah 6](/docs/pertemuan-12/praktikum-9/langkah-6.gif)
+
 ## Soal 17
+
+- Pertama saat tombol "Change Color" ditekan, fungsi `_showColorDialog` dipanggil.
+
+- Fungsi `_showColorDialog` menggunakan `showDialog` untuk menampilkan dialog pilihan warna. Dialog ini berisi beberapa tombol yang memungkinkan pengguna memilih warna: Merah, Hijau, atau Biru.
+
+- Pengguna memilih salah satu warna dengan menekan salah satu tombol di dialog (misalnya, tombol "Red" untuk merah). Ketika tombol warna ditekan, fungsi `onPressed` dari tombol tersebut dipanggil. Dalam fungsi ini, variabel color diatur ke warna yang sesuai (misalnya, `Colors.red.shade700` untuk merah). Setelah mengatur warna, dialog ditutup menggunakan `Navigator.pop(context, color)`, yang juga mengirimkan warna yang dipilih sebagai nilai return (color).
+
+- Fungsi `showDialog` adalah fungsi asynchronous yang menunggu sampai dialog ditutup dan mengembalikan nilai yang dikirim melalui `Navigator.pop.` Nilai yang dikembalikan oleh `showDialog` disimpan dalam variabel `newColor`.
+
+- Setelah dialog ditutup dan `newColor` diterima, aplikasi memeriksa apakah `newColor` bukan null. Jika `newColor` valid (bukan null), aplikasi memanggil `setState()` untuk mengubah warna latar belakang dengan nilai `newColor`.
+
+- `setState()` memberi tahu framework Flutter bahwa ada perubahan pada `state` yang memerlukan pembaruan tampilan. Flutter kemudian merender ulang `widget` dengan warna latar belakang baru yang ditentukan oleh `newColor`.
+
+Mengubah warna dengan warna favorit.
+
+![Soal 17](/docs/pertemuan-12/praktikum-9/soal-17.1.png)
+
+**Result**
+
+![Result](/docs/pertemuan-12/praktikum-9/soal-17.2.gif)
