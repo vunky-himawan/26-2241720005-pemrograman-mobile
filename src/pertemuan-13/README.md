@@ -126,3 +126,142 @@ void changeColor() async {
 ```
 
 `await for` adalah cara `asinkron` untuk menunggu setiap data baru pada `stream`, satu per satu. Dimana ketika ada data baru, `await for` berhenti sementara untuk memproses data tersebut sebelum lanjut ke data berikutnya. Dimana prosesnya yaitu menunggu data baru dari `stream`. Lalu menjalankan blok kode di dalam `await for`. Diulangi untuk data berikutnya hingga `stream` selesai.
+
+# Praktikum 2: Stream controllers dan sinks
+
+### Langkah 1: Buka file stream.dart
+
+![Langkah 1](/docs/pertemuan-13/praktikum-2/langkah-1.png)
+
+### Langkah 2: Tambah class NumberStream
+
+![Langkah 2](/docs/pertemuan-13/praktikum-2/langkah-2.png)
+
+### Langkah 3: Tambah StreamController
+
+![Langkah 3](/docs/pertemuan-13/praktikum-2/langkah-3.png)
+
+### Langkah 4: Tambah method addNumberToSink
+
+![Langkah 4](/docs/pertemuan-13/praktikum-2/langkah-4.png)
+
+### Langkah 5: Tambah method close()
+
+![Langkah 5](/docs/pertemuan-13/praktikum-2/langkah-5.png)
+
+### Langkah 6: Buka main.dart
+
+![Langkah 6](/docs/pertemuan-13/praktikum-2/langkah-6.png)
+
+### Langkah 7: Tambah variabel
+
+![Langkah 7](/docs/pertemuan-13/praktikum-2/langkah-7.png)
+
+### Langkah 8: Edit initState()
+
+![Langkah 8](/docs/pertemuan-13/praktikum-2/langkah-8.png)
+
+### Langkah 9: Edit dispose()
+
+![Langkah 9](/docs/pertemuan-13/praktikum-2/langkah-9.png)
+
+### Langkah 10: Tambah method addRandomNumber()
+
+![Langkah 10](/docs/pertemuan-13/praktikum-2/langkah-10.png)
+
+### Langkah 11: Edit method build()
+
+![Langkah 11](/docs/pertemuan-13/praktikum-2/langkah-11.png)
+
+### Langkah 12: Run
+
+![Langkah 12](/docs/pertemuan-13/praktikum-2/langkah-12.png)
+
+## Soal 6
+
+![Soal 6](/docs/pertemuan-13/praktikum-2/soal-6.gif)
+
+Langkah 8
+
+```dart
+@override
+  void initState() {
+    super.initState();
+    numberStream = NumberStream();
+    numberStreamController = numberStream.controller;
+    Stream stream = numberStreamController.stream;
+    stream.listen(
+      (event) {
+        setState(
+          () {
+            lastNumber = event;
+          },
+        );
+      },
+    );
+  }
+```
+
+Langkah 10
+
+```dart
+void addRandomNumber() {
+    Random random = Random();
+    int myNum = random.nextInt(10);
+    numberStream.addNumber(myNum);
+  }
+```
+
+Ketika aplikasi mulai dijalankan `initState` membuat stream mengambil controllernya, dan mulai mendengarkan data baru. Kemudian UI disiapkan untuk menampilkan data dari `lastNumber`.
+
+Ketika fungsi `addRandomNumber` dipanggil angka acak dihasilkan dan ditambahkan ke `stream` melalui `numberStream.addNumber`. Stream menghasilkan sebuah event, sehingga listener `(stream.listen)` menerima angka baru.
+
+Listener menjalankan `setState` untuk memperbarui `lastNumber` dengan angka baru. Flutter kemudian memperbarui UI untuk menampilkan angka tersebut.
+
+## Soal 7
+
+Langkah 13
+
+```dart
+addError() {
+    controller.sink.addError('error');
+  }
+```
+
+Langkah 14
+
+```dart
+@override
+  void initState() {
+    super.initState();
+    numberStream = NumberStream();
+    numberStreamController = numberStream.controller;
+    Stream stream = numberStreamController.stream;
+    stream.listen((event) {
+      setState(() {
+        lastNumber = event;
+      });
+    }).onError((error) {
+      setState(() {
+        lastNumber = 0;
+      });
+    });
+  }
+```
+
+Langkah 15
+
+```dart
+void addRandomNumber() {
+    Random random = Random();
+    // int myNum = random.nextInt(10);
+    // numberStream.addNumber(myNum);
+    numberStream.addError();
+  }
+```
+
+Ketika aplikasi mulai dijalankan `initState` membuat stream dan mendengarkannya. Kemudian listener siap mengolah data biasa atau error.
+
+Ketika `addRandomNumber` dijalankan fungsi ini mengirimkan error ke stream dengan `numberStream.addError()`.
+
+Listener pada Stream, `callback` data biasa tidak dipanggil karena yang dikirim adalah error. Callback error (onError) dipanggil, dan UI diperbarui dengan `lastNumber = 0`.
