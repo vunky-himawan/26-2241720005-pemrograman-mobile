@@ -31,6 +31,8 @@ class StreamHomePage extends StatefulWidget {
 }
 
 class _StreamHomePageState extends State<StreamHomePage> {
+  late StreamTransformer transformer;
+  late StreamSubscription subscription;
   int lastNumber = 0;
   late StreamController numberStreamController;
   late NumberStream numberStream;
@@ -50,10 +52,24 @@ class _StreamHomePageState extends State<StreamHomePage> {
 
   @override
   void initState() {
-    super.initState();
     numberStream = NumberStream();
     numberStreamController = numberStream.controller;
-    Stream stream = numberStreamController.stream;
+    super.initState();
+
+    transformer = StreamTransformer<int, int>.fromHandlers(
+      handleData: (value, sink) {
+        sink.add(value * 10);
+      },
+      handleError: (error, trace, sink) {
+        sink.add(-1);
+      },
+      handleDone: (sink) {
+        sink.close();
+      },
+    );
+
+    Stream stream = numberStreamController.stream.transform(transformer);
+
     stream.listen((event) {
       setState(() {
         lastNumber = event;

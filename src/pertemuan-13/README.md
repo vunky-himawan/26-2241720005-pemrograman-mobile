@@ -265,3 +265,29 @@ Ketika aplikasi mulai dijalankan `initState` membuat stream dan mendengarkannya.
 Ketika `addRandomNumber` dijalankan fungsi ini mengirimkan error ke stream dengan `numberStream.addError()`.
 
 Listener pada Stream, `callback` data biasa tidak dipanggil karena yang dikirim adalah error. Callback error (onError) dipanggil, dan UI diperbarui dengan `lastNumber = 0`.
+
+# Praktikum 3: Injeksi data ke streams
+
+### Langkah 1: Buka main.dart
+
+![Langkah 1](/docs/pertemuan-13/praktikum-3/langkah-1.png)
+
+### Langkah 2: Tambahkan kode ini di initState
+
+![Langkah 2](/docs/pertemuan-13/praktikum-3/langkah-2.png)
+
+### Langkah 3: Tetap di initState
+
+![Langkah 3](/docs/pertemuan-13/praktikum-3/langkah-3.png)
+
+### Langkah 4: Run
+
+![Langkah 4](/docs/pertemuan-13/praktikum-3/langkah-4.png)
+
+## Soal 8
+
+![Soal 8](/docs/pertemuan-13/praktikum-3/soal-8.gif)
+
+Pertama saat aplikasi mulai dijalankan `initState` menginisialisasi stream dan transformer. Stream dihubungkan ke transformer, sehingga semua data dan error yang masuk diproses terlebih dahulu.
+
+Ketika data dikirim ke `Stream`, jika datanya bukan error / data biasa maka data akan dimodifikasi oleh transformer untuk dikalikan 10, Kemudian listener menerima data hasil transformasi dan memperbarui UI. Jika datanya merupakan error, transformer akan mengubah error menjadi nilai -1, lalu listener menerima nilai -1 sebagai data biasa.
