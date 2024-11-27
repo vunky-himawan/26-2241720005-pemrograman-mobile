@@ -291,3 +291,55 @@ Listener pada Stream, `callback` data biasa tidak dipanggil karena yang dikirim 
 Pertama saat aplikasi mulai dijalankan `initState` menginisialisasi stream dan transformer. Stream dihubungkan ke transformer, sehingga semua data dan error yang masuk diproses terlebih dahulu.
 
 Ketika data dikirim ke `Stream`, jika datanya bukan error / data biasa maka data akan dimodifikasi oleh transformer untuk dikalikan 10, Kemudian listener menerima data hasil transformasi dan memperbarui UI. Jika datanya merupakan error, transformer akan mengubah error menjadi nilai -1, lalu listener menerima nilai -1 sebagai data biasa.
+
+# Praktikum 4: Subscribe ke stream events
+
+### Langkah 1: Tambah variabel
+
+![Langkah 1](/docs/pertemuan-13/praktikum-4/langkah-1.png)
+
+### Langkah 2: Edit initState()
+
+![Langkah 2](/docs/pertemuan-13/praktikum-4/langkah-2.png)
+
+### Langkah 3: Tetap di initState()
+
+![Langkah 3](/docs/pertemuan-13/praktikum-4/langkah-3.png)
+
+### Langkah 4: Tambah properti onDone()
+
+![Langkah 4](/docs/pertemuan-13/praktikum-4/langkah-4.png)
+
+### Langkah 5: Tambah method baru
+
+![Langkah 5](/docs/pertemuan-13/praktikum-4/langkah-5.png)
+
+### Langkah 6: Pindah ke method dispose()
+
+![Langkah 6](/docs/pertemuan-13/praktikum-4/langkah-6.png)
+
+### Langkah 7: Pindah ke method build()
+
+![Langkah 7](/docs/pertemuan-13/praktikum-4/langkah-7.png)
+
+### Langkah 8: Edit method addRandomNumber()
+
+![Langkah 8](/docs/pertemuan-13/praktikum-4/langkah-8.png)
+
+### Langkah 9: Run
+
+![Langkah 9](/docs/pertemuan-13/praktikum-4/langkah-9.png)
+
+### Langkah 10: Tekan button ‘Stop Subscription'
+
+![Langkah 10](/docs/pertemuan-13/praktikum-4/langkah-10.png)
+
+## Soal 9
+
+![Soal 9](/docs/pertemuan-13/praktikum-4/soal-9.gif)
+
+Ketika aplikasi mulai dijalankan `initState` membuat stream dan listener. Listener akan memperbarui nilai `lastNumber` setiap kali ada data baru di stream.
+
+Ketika angka random ditambahkan `addRandomNumber` menambahkan angka ke stream jika controller belum ditutup. Jika controller sudah ditutup, lastNumber diperbarui menjadi -1. 
+
+Terakhir ketika `dispose` dipanggil untuk membatalkan langganan, ini digunakan untuk mencegah aplikasi mendengarkan stream yang tidak diperlukan lagi.
