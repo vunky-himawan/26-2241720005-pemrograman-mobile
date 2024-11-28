@@ -478,3 +478,70 @@ body: StreamBuilder(
 - Jika ada error, menampilkan pesan error (di sini hanya mencetak ke konsol).
 - Jika ada data (snapshot.hasData), menampilkan angka terbaru di tengah layar dengan ukuran teks yang besar (fontSize: 96).
 - Jika tidak ada data, tidak menampilkan apa-apa (SizedBox.shrink).
+
+# Praktikum 7: BLoC Pattern
+
+### Langkah 1: Buat Project baru
+
+![Langkah 1](/docs/pertemuan-13/praktikum-7/langkah-1.png)
+
+![Langkah 1.2](/docs/pertemuan-13/praktikum-7/langkah-1.2.png)
+
+### Langkah 2: Isi kode random_bloc.dart
+
+![Langkah 2](/docs/pertemuan-13/praktikum-7/langkah-2.png)
+
+### Langkah 3: Buat class RandomNumberBloc()
+
+![Langkah 3](/docs/pertemuan-13/praktikum-7/langkah-3.png)
+
+### Langkah 4: Buat variabel StreamController
+
+![Langkah 4](/docs/pertemuan-13/praktikum-7/langkah-4.png)
+
+### Langkah 5: Buat constructor
+
+![Langkah 5](/docs/pertemuan-13/praktikum-7/langkah-5.png)
+
+### Langkah 6: Buat method dispose()
+
+![Langkah 6](/docs/pertemuan-13/praktikum-7/langkah-6.png)
+
+### Langkah 7: Edit main.dart
+
+![Langkah 7](/docs/pertemuan-13/praktikum-7/langkah-7.png)
+
+### Langkah 8: Buat file baru random_screen.dart
+
+![Langkah 8](/docs/pertemuan-13/praktikum-7/langkah-8.png)
+
+### Langkah 9: Lakukan impor material dan random_bloc.dart
+
+![Langkah 9](/docs/pertemuan-13/praktikum-7/langkah-9.png)
+
+### Langkah 10: Buat StatefulWidget RandomScreen
+
+![Langkah 10](/docs/pertemuan-13/praktikum-7/langkah-10.png)
+
+### Langkah 11: Buat variabel
+
+![Langkah 11](/docs/pertemuan-13/praktikum-7/langkah-11.png)
+
+### Langkah 12: Buat method dispose()
+
+![Langkah 12](/docs/pertemuan-13/praktikum-7/langkah-12.png)
+
+### Langkah 13: Edit method build()
+
+![Langkah 13](/docs/pertemuan-13/praktikum-7/langkah-13.png)
+
+## Soal 13
+
+![Soal 13](/docs/pertemuan-13/praktikum-7/soal-13.gif)
+
+Praktikum ini bertujuan untuk mengimplementasikan pola arsitektur BLoC (Business Logic Component) dalam Flutter untuk memisahkan logika bisnis dari tampilan UI. Dengan cara ini, aplikasi menjadi lebih modular, dapat diuji dengan lebih mudah, dan mudah untuk dikembangkan.
+
+Dimana BLoC diterapkan pada praktikum ini:
+
+- Logika bisnis ada di class RandomNumberBloc, yang bertugas menerima event, memproses data (angka acak), dan mengalirkan state ke UI.
+- UI hanya mendengarkan perubahan state dari stream (StreamBuilder) dan memperbarui tampilan secara otomatis, tanpa perlu mengetahui detail logika bisnis.
