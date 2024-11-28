@@ -382,3 +382,99 @@ Error tersebut terjadi karena aliran `Stream` yang digunakan bersifat single-sub
 ![Soal 11](/docs/pertemuan-13/praktikum-5/soal-11.gif)
 
 Ketika kita menggunakan `asBroadcastStream()` untuk mengubah stream menjadi broadcast stream, setiap listener yang subscribe akan menerima semua data dari stream. Dengan kata lain, kedua listener akan menerima event yang sama.
+
+# Praktikum 6: StreamBuilder
+
+### Langkah 1: Buat Project Baru
+
+![Langkah 1](/docs/pertemuan-13/praktikum-6/langkah-1.png)
+
+### Langkah 2: Buat file baru stream.dart
+
+![Langkah 2](/docs/pertemuan-13/praktikum-6/langkah-2.png)
+
+### Langkah 3: Tetap di file stream.dart
+
+![Langkah 3](/docs/pertemuan-13/praktikum-6/langkah-3.png)
+
+### Langkah 4: Edit main.dart
+
+![Langkah 4](/docs/pertemuan-13/praktikum-6/langkah-4.png)
+
+### Langkah 5: Tambah variabel
+
+![Langkah 5](/docs/pertemuan-13/praktikum-6/langkah-5.png)
+
+### Langkah 6: Edit initState()
+
+![Langkah 6](/docs/pertemuan-13/praktikum-6/langkah-6.png)
+
+### Langkah 7: Edit method build()
+
+![Langkah 7](/docs/pertemuan-13/praktikum-6/langkah-7.png)
+
+### Langkah 8: Run
+
+![Langkah 8](/docs/pertemuan-13/praktikum-6/langkah-8.png)
+
+## Soal 12
+
+![Soal 12](/docs/pertemuan-13/praktikum-6/soal-12.gif)
+
+Langkah 3
+
+```dart
+import 'dart:math';
+
+class NumberStream {
+  Stream<int> getNumbers() async* {
+    yield* Stream.periodic(const Duration(seconds: 1), (int t) {
+      Random random = Random();
+      int myNum = random.nextInt(10);
+      return myNum;
+    });
+  }
+}
+```
+
+Pada fungsi `getNumbers()` menggunakan `Stream.periodic` dimana fungsi ini menghasilkan data secara berkala, dalam praktikum ini setiap 1 detik. Pada setiap periode, fungsi memanggil logika berikut:
+
+- Membuat sebuah objek random menggunakan `Random()`.
+- Menghasilkan angka acak antara 0 hingga 9 menggunakan `random.nextInt(10)`.
+- Mengembalikan angka tersebut sebagai bagian dari aliran data (stream).
+
+`yield*` digunakan untuk "mengalirkan" data dari `Stream.periodic` ke komponen lain yang akan membaca data tersebut.
+
+Langkah 7
+
+```dart
+body: StreamBuilder(
+        stream: numberStream,
+        initialData: 0,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print("error");
+          }
+          if (snapshot.hasData) {
+            return Center(
+              child: Text(
+                snapshot.data.toString(),
+                style: const TextStyle(fontSize: 96),
+              ),
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
+      ),
+```
+
+`StreamBuilder` merupakan komponen Flutter yang digunakan untuk "mendengarkan" aliran data (stream) dan memperbarui tampilan secara otomatis setiap kali ada data baru yang dihasilkan. Pada `StreamBuilder` terdapat tiga parameter yaitu
+
+1. `stream`: Menghubungkan aliran data pada praktikum ini menggunakan `NumberStream`.
+2. `initialData`: Memberikan nilai awal yang akan ditampilkan sebelum stream menghasilkan data, yaitu pada praktikum ini diberikan angka 0.
+3. `builder` Fungsi ini dipanggil setiap kali ada data baru dalam aliran. pada fungsi ini terdapat dua parameter yaitu `context` dan `snapshot`, dimana snapsot merupakan objek yang berisi data terbaru dari stream. Pada praktikum ini terdapat tiga kemungkinan data yang bisa didapatkan dari snapshot:
+
+- Jika ada error, menampilkan pesan error (di sini hanya mencetak ke konsol).
+- Jika ada data (snapshot.hasData), menampilkan angka terbaru di tengah layar dengan ukuran teks yang besar (fontSize: 96).
+- Jika tidak ada data, tidak menampilkan apa-apa (SizedBox.shrink).
