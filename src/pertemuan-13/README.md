@@ -37,7 +37,7 @@
 
 ![Langkah 5](/docs/pertemuan-13/praktikum-1/langkah-5.png)
 
-### Langkah 6: Tambah perintah yield*
+### Langkah 6: Tambah perintah yield\*
 
 ![Langkah 6](/docs/pertemuan-13/praktikum-1/langkah-6.png)
 
@@ -81,7 +81,7 @@
 
 `yield*` merupakan cara metode menggabungkan `stream` lain ke dalam `stream` yang sedang kita buat, dimana semua nilai dari `stream` yang lain akan langsung diteruskan ke `stream` utama.
 
-Menggunakan `yield*` berarti kita tidak perlu memproses setiap nilai yang dihasilkan oleh `Stream.periodic` secara manual. Semua nilai yang dihasilkan oleh `Stream.periodic` langsung diteruskan ke aliran (stream) `getColors`. Hasilnya adalah warna (dari daftar colors) yang terus-menerus mengalir setiap detik. 
+Menggunakan `yield*` berarti kita tidak perlu memproses setiap nilai yang dihasilkan oleh `Stream.periodic` secara manual. Semua nilai yang dihasilkan oleh `Stream.periodic` langsung diteruskan ke aliran (stream) `getColors`. Hasilnya adalah warna (dari daftar colors) yang terus-menerus mengalir setiap detik.
 
 ## Soal 4
 
@@ -108,6 +108,7 @@ void changeColor() async {
 `listen` merupakan sebuah method `stream` yang memungkinkan kita "mendengarkan" setiap data baru yang masuk. Dengan menggunakan `listen` kita bisa memberikan method `(callback)` ke `listen`, yang akan dipanggil setiap kali ada data baru pada stream.
 
 Manfaat dari `listen` adalah:
+
 - Tidak menghentikan kode lainnya (berjalan secara paralel/asinkron). Langsung bereaksi setiap kali data diterima.
 - Tidak menunggu sampai semua data selesai diterima. Kita hanya terus mendengarkan aliran data.
 
@@ -340,6 +341,44 @@ Ketika data dikirim ke `Stream`, jika datanya bukan error / data biasa maka data
 
 Ketika aplikasi mulai dijalankan `initState` membuat stream dan listener. Listener akan memperbarui nilai `lastNumber` setiap kali ada data baru di stream.
 
-Ketika angka random ditambahkan `addRandomNumber` menambahkan angka ke stream jika controller belum ditutup. Jika controller sudah ditutup, lastNumber diperbarui menjadi -1. 
+Ketika angka random ditambahkan `addRandomNumber` menambahkan angka ke stream jika controller belum ditutup. Jika controller sudah ditutup, lastNumber diperbarui menjadi -1.
 
 Terakhir ketika `dispose` dipanggil untuk membatalkan langganan, ini digunakan untuk mencegah aplikasi mendengarkan stream yang tidak diperlukan lagi.
+
+# Praktikum 5: Multiple stream subscriptions
+
+### Langkah 1: Buka file main.dart
+
+![Langkah 1](/docs/pertemuan-13/praktikum-5/langkah-1.png)
+
+### Langkah 2: Edit initState()
+
+![Langkah 2](/docs/pertemuan-13/praktikum-5/langkah-2.png)
+
+### Langkah 3: Run
+
+![Langkah 3](/docs/pertemuan-13/praktikum-5/langkah-3.png)
+
+### Langkah 4: Set broadcast stream
+
+![Langkah 4](/docs/pertemuan-13/praktikum-5/langkah-4.png)
+
+### Langkah 5: Edit method build()
+
+![Langkah 5](/docs/pertemuan-13/praktikum-5/langkah-5.png)
+
+### Langkah 6: Run
+
+![Langkah 6](/docs/pertemuan-13/praktikum-5/langkah-6.png)
+
+## Soal 10
+
+![Soal 10](/docs/pertemuan-13/praktikum-5/langkah-3.png)
+
+Error tersebut terjadi karena aliran `Stream` yang digunakan bersifat single-subscription, yang berarti hanya dapat didengarkan listen oleh satu subscriber pada satu waktu.
+
+## Soal 11
+
+![Soal 11](/docs/pertemuan-13/praktikum-5/soal-11.gif)
+
+Ketika kita menggunakan `asBroadcastStream()` untuk mengubah stream menjadi broadcast stream, setiap listener yang subscribe akan menerima semua data dari stream. Dengan kata lain, kedua listener akan menerima event yang sama.
